@@ -4,16 +4,14 @@ Thanks for your interest in contributing!
 
 ## Getting Started
 
-Clone the BowerBot core and this skill side by side, then install both editable:
-
 ```bash
-git clone https://github.com/binary-core-llc/bowerbot.git
 git clone https://github.com/binary-core-llc/bowerbot-skill-sketchfab.git
 cd bowerbot-skill-sketchfab
-uv pip install -e ../bowerbot
-uv pip install -e .[dev]
+uv sync --extra dev
 uv run pytest
 ```
+
+This pulls BowerBot from PyPI. If you are also developing BowerBot itself and want to run the skill against a local checkout, run `uv pip install -e ../bowerbot` after `uv sync` to override the PyPI install.
 
 ## How to Submit Changes
 

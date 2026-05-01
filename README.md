@@ -84,16 +84,22 @@ The skill is **hyper-isolated**: it imports only from `bowerbot.skills` (the pub
 
 ## Development
 
-Clone the BowerBot core and this skill side by side, then install both editable:
+Default flow uses BowerBot from PyPI:
 
 ```bash
-git clone https://github.com/binary-core-llc/bowerbot.git
 git clone https://github.com/binary-core-llc/bowerbot-skill-sketchfab.git
 cd bowerbot-skill-sketchfab
-uv pip install -e ../bowerbot
-uv pip install -e .[dev]
+uv sync --extra dev
 uv run pytest
 ```
+
+If you are also working on BowerBot itself and want an editable install of the core against your local checkout, run this **after** `uv sync`:
+
+```bash
+uv pip install -e ../bowerbot
+```
+
+That overrides the PyPI-resolved bowerbot with your local source.
 
 ## License
 

@@ -11,9 +11,7 @@ authors = [
 keywords = ["bowerbot", "bowerbot-skill", "sketchfab", "usd", "openusd", "3d"]
 
 dependencies = [
-    # Tighten to bowerbot>=1.5,<2 once 1.5.0 is published to PyPI.
-    # Develop locally with: uv pip install -e ../bowerbot
-    "bowerbot",
+    "bowerbot>=1.5,<2",
     "httpx>=0.27",
     "pydantic>=2.0",
 ]
@@ -36,12 +34,6 @@ Issues = "https://github.com/binary-core-llc/bowerbot-skill-sketchfab/issues"
 [build-system]
 requires = ["uv_build>=0.10.4,<0.11.0"]
 build-backend = "uv_build"
-
-# Local development: resolve bowerbot from a sibling checkout instead of
-# PyPI. This block is uv-specific and ignored by pip / other resolvers.
-# Remove (or override in a private workspace) once bowerbot is on PyPI.
-[tool.uv.sources]
-bowerbot = { path = "../bowerbot", editable = true }
 
 [tool.ruff]
 target-version = "py312"
