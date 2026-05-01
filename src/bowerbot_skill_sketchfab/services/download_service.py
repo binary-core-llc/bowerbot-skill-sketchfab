@@ -9,7 +9,6 @@ import logging
 from typing import Any
 
 import httpx
-
 from bowerbot.skills import SkillContext, ToolResult
 
 from bowerbot_skill_sketchfab.utils.api_utils import (

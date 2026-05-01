@@ -15,7 +15,6 @@ import tempfile
 from pathlib import Path
 
 import pytest
-
 from bowerbot.skills import (
     Skill,
     SkillCategory,
