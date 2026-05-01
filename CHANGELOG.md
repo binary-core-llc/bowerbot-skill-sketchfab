@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.1](https://github.com/binary-core-llc/bowerbot-skill-sketchfab/compare/v0.1.0...v0.1.1) (2026-05-01)
+
+
+### Bug Fixes
+
+* align import groups with ruff isort + declare first-party package ([481056e](https://github.com/binary-core-llc/bowerbot-skill-sketchfab/commit/481056ee16e02ce0c910aaa94b296181225dad5f))
+
+
+### Documentation
+
+* show both uv and pip install paths ([#3](https://github.com/binary-core-llc/bowerbot-skill-sketchfab/issues/3)) ([d18c428](https://github.com/binary-core-llc/bowerbot-skill-sketchfab/commit/d18c4287239caeea854c0686e9fb0ad4fc5a4516))
+
 ## 0.1.0 (2026-05-01)
 
 
