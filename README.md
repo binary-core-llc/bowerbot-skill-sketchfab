@@ -28,6 +28,16 @@ Downloaded models land under `<assets_dir>/cache/sketchfab/` and are immediately
 
 ## Install
 
+Match the install method you used for BowerBot itself.
+
+If you installed BowerBot with `uv tool install`, add the skill to the same tool environment:
+
+```bash
+uv tool install bowerbot --with bowerbot-skill-sketchfab --reinstall
+```
+
+If you installed BowerBot with `pip` (in a venv or system-wide), install the skill into the same Python environment:
+
 ```bash
 pip install bowerbot-skill-sketchfab
 ```
