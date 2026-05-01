@@ -32,7 +32,7 @@ Issues = "https://github.com/binary-core-llc/bowerbot-skill-sketchfab/issues"
 "BowerBot core" = "https://github.com/binary-core-llc/bowerbot"
 
 [build-system]
-requires = ["uv_build>=0.10.4,<0.11.0"]
+requires = ["uv_build>=0.10.4,<0.12.0"]
 build-backend = "uv_build"
 
 [tool.ruff]
