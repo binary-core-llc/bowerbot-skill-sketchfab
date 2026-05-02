@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/binary-core-llc/bowerbot-skill-sketchfab/compare/v0.1.1...v0.1.2) (2026-05-02)
+
+
+### Bug Fixes
+
+* pin major version upper bounds and bump litellm to address 3 CVEs ([#19](https://github.com/binary-core-llc/bowerbot-skill-sketchfab/issues/19)) ([ea2738d](https://github.com/binary-core-llc/bowerbot-skill-sketchfab/commit/ea2738d38b9d7c6c2060ef7944ca236f2a4d5cc8))
+
 ## [0.1.1](https://github.com/binary-core-llc/bowerbot-skill-sketchfab/compare/v0.1.0...v0.1.1) (2026-05-01)
 
 
