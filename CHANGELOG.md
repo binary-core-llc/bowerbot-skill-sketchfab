@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/binary-core-llc/bowerbot-skill-sketchfab/compare/v0.1.2...v0.1.3) (2026-05-29)
+
+
+### Bug Fixes
+
+* **renovate:** open PRs immediately to avoid CI deadlock ([#21](https://github.com/binary-core-llc/bowerbot-skill-sketchfab/issues/21)) ([2d06f3a](https://github.com/binary-core-llc/bowerbot-skill-sketchfab/commit/2d06f3afc25ee54c55a067293f8f5d848042ebe2))
+
 ## [0.1.2](https://github.com/binary-core-llc/bowerbot-skill-sketchfab/compare/v0.1.1...v0.1.2) (2026-05-02)
 
 
