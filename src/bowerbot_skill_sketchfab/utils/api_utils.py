@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from typing import Any
 
-import httpx
+import requests
 
 BASE_URL = "https://api.sketchfab.com/v3"
 
@@ -20,15 +20,14 @@ def auth_headers(token: str) -> dict[str, str]:
     }
 
 
-def parse_response(resp: httpx.Response, endpoint: str) -> dict[str, Any]:
+def parse_response(resp: requests.Response, endpoint: str) -> dict[str, Any]:
     """Parse a Sketchfab response, raising a clear error on WAF / empty body."""
     waf_action = resp.headers.get("x-amzn-waf-action")
     if waf_action:
         raise RuntimeError(
-            f"Sketchfab WAF blocked the request to {endpoint} "
-            f"(action={waf_action!r}). This is IP-based rate limiting from "
-            "AWS CloudFront, not an auth or skill problem. Wait a few "
-            "minutes and retry, or switch networks."
+            f"Sketchfab's AWS CloudFront WAF challenged the request to "
+            f"{endpoint} (action={waf_action!r}). Retry shortly or switch "
+            "networks; this is not an auth or skill problem."
         )
     if not resp.content:
         raise RuntimeError(
@@ -43,6 +42,30 @@ def parse_response(resp: httpx.Response, endpoint: str) -> dict[str, Any]:
             f"Sketchfab returned non-JSON (HTTP {resp.status_code}) "
             f"for {endpoint}: {resp.content[:200]!r}",
         ) from e
+
+
+def get_json(
+    endpoint: str,
+    token: str,
+    params: dict[str, Any] | None = None,
+    timeout: float = 15.0,
+) -> dict[str, Any]:
+    """Blocking authenticated GET of a BASE_URL-relative endpoint, parsed as JSON."""
+    resp = requests.get(
+        f"{BASE_URL}{endpoint}",
+        params=params,
+        headers=auth_headers(token),
+        timeout=timeout,
+    )
+    resp.raise_for_status()
+    return parse_response(resp, endpoint)
+
+
+def get_bytes(url: str, timeout: float = 120.0) -> bytes:
+    """Blocking GET of a pre-signed download URL, returning the raw body."""
+    resp = requests.get(url, timeout=timeout)
+    resp.raise_for_status()
+    return resp.content
 
 
 def safe_file_name(name: str) -> str:
