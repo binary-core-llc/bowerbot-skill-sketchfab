@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.4](https://github.com/binary-core-llc/bowerbot-skill-sketchfab/compare/v0.1.3...v0.1.4) (2026-05-30)
+
+
+### Bug Fixes
+
+* handle Sketchfab WAF blocks and empty/non-JSON responses ([#26](https://github.com/binary-core-llc/bowerbot-skill-sketchfab/issues/26)) ([653251e](https://github.com/binary-core-llc/bowerbot-skill-sketchfab/commit/653251ecbb2892e821e12aa8645a0c72b652481e))
+* use requests instead of httpx to dodge CloudFront WAF block ([#28](https://github.com/binary-core-llc/bowerbot-skill-sketchfab/issues/28)) ([217d692](https://github.com/binary-core-llc/bowerbot-skill-sketchfab/commit/217d692344d7f4ad25419821b9c4e072597bd0ca))
+
 ## [0.1.3](https://github.com/binary-core-llc/bowerbot-skill-sketchfab/compare/v0.1.2...v0.1.3) (2026-05-29)
 
 
