@@ -5,15 +5,15 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 from typing import Any
 
-import httpx
 from bowerbot.skills import SkillContext, ToolResult
 
 from bowerbot_skill_sketchfab.utils.api_utils import (
-    BASE_URL,
-    auth_headers,
+    get_bytes,
+    get_json,
     safe_file_name,
 )
 
@@ -34,33 +34,26 @@ async def download_model(
     name = params["name"]
     safe_name = safe_file_name(name) or uid
 
-    async with httpx.AsyncClient(follow_redirects=True) as client:
-        resp = await client.get(
-            f"{BASE_URL}/models/{uid}/download",
-            headers=auth_headers(token),
-            timeout=15.0,
+    download_info = await asyncio.to_thread(
+        get_json, f"/models/{uid}/download", token,
+    )
+
+    usdz = download_info.get("usdz") or {}
+    if not usdz.get("url"):
+        return ToolResult(
+            success=False,
+            error=(
+                f"Model '{name}' ({uid}) has no USDZ format available. "
+                "Only USD assets are supported."
+            ),
         )
-        resp.raise_for_status()
-        download_info = resp.json()
 
-        usdz = download_info.get("usdz") or {}
-        if not usdz.get("url"):
-            return ToolResult(
-                success=False,
-                error=(
-                    f"Model '{name}' ({uid}) has no USDZ format available. "
-                    "Only USD assets are supported."
-                ),
-            )
+    download_url = usdz["url"]
+    file_size = usdz.get("size", 0)
+    logger.info("Downloading USDZ (%s bytes) for %s", file_size, name)
 
-        download_url = usdz["url"]
-        file_size = usdz.get("size", 0)
-        logger.info("Downloading USDZ (%s bytes) for %s", file_size, name)
-
-        final_path = ctx.cache_dir / f"{safe_name}.usdz"
-        resp = await client.get(download_url, timeout=120.0)
-        resp.raise_for_status()
-        final_path.write_bytes(resp.content)
+    final_path = ctx.cache_dir / f"{safe_name}.usdz"
+    final_path.write_bytes(await asyncio.to_thread(get_bytes, download_url))
 
     logger.info("Downloaded %s to %s", name, final_path)
     return ToolResult(
